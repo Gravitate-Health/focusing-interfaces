@@ -1,0 +1,307 @@
+openapi: 3.0.0
+info:
+  title: Gravitate Health Focusing Interface
+  version: 0.0.1
+  description: Interface detailing the methods available for focusing
+  contact:
+    name: Álvaro Belmar
+    email: abelmar@lst.tfo.upm.es
+paths:
+  /med-information-focus:
+    post:
+      tags:
+        - Medication Information Focusing
+      responses:
+        '200':
+          description: Medication Information Focusing endpoint
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedInformation'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MedInformation'
+  /med-administration-focus:
+    post:
+      tags:
+        - Medication Administration Focusing
+      responses:
+        '200':
+          description: Medication Administration Focusing endpoint
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedAdministration'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MedAdministration'
+  /med-dispense-focus:
+    post:
+      tags:
+        - Medication Dispense Focusing
+      responses:
+        '200':
+          description: Medication Dispense Focusing endpoint
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedDispense'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MedDispense'
+  /med-request-focus:
+    post:
+      tags:
+        - Medication Request Focusing
+      responses:
+        '200':
+          description: Medication Request Focusing endpoint
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedRequest'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MedRequest'
+  /med-usage-focus:
+    post:
+      tags:
+        - Medication USage Focusing
+      responses:
+        '200':
+          description: Medication Usage Focusing endpoint
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedUsage'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/MedUsage'
+servers:
+  - url: http://127.0.0.1:3000
+components:
+  schemas:
+    MedInformation:
+      title: MedInformation
+      type: object
+      properties:
+        id:
+          type: number
+        identifier:
+          type: string
+        code: {}
+        status:
+          type: string
+        marketingAuthorizationHolder: {}
+        doseForm: {}
+        totalVolume: {}
+        ingredient: {}
+        batch: {}
+      required:
+        - id
+        - identifier
+        - status
+      additionalProperties: false
+    MedAdministration:
+      title: MedAdministration
+      type: object
+      properties:
+        id:
+          type: number
+        identifier:
+          type: string
+        instantiatesCanonical: {}
+        instantiatesUri:
+          type: string
+        basedOn: {}
+        partOf: {}
+        status:
+          type: string
+        statusReason: {}
+        category: {}
+        medication: {}
+        subject: {}
+        encounter: {}
+        supportingInformation: {}
+        occurence: {}
+        recorded:
+          type: string
+          format: date-time
+        isSubPotent:
+          type: boolean
+        subPotentReason: {}
+        performer: {}
+        reason: {}
+        request: {}
+        device: {}
+        note: {}
+        dosage: {}
+        eventHistory: {}
+      required:
+        - id
+        - identifier
+        - status
+      additionalProperties: false
+    MedDispense:
+      title: MedDispense
+      type: object
+      properties:
+        id:
+          type: number
+        identifier:
+          type: string
+        basedOn: {}
+        partOf: {}
+        status:
+          type: string
+        notPerformedReason: {}
+        statusChanged:
+          type: string
+          format: date-time
+        category: {}
+        medication: {}
+        subject: {}
+        encounter: {}
+        supportingInformation: {}
+        performer: {}
+        location: {}
+        authorizingPrescription: {}
+        type: {}
+        quantity: {}
+        daysSupply: {}
+        recorded:
+          type: string
+          format: date-time
+        whenPrepared:
+          type: string
+          format: date-time
+        whenHandedOver:
+          type: string
+          format: date-time
+        destination: {}
+        receiver: {}
+        note: {}
+        renderedDosageInstruction:
+          type: string
+        dosageInstruction: {}
+        substitution: {}
+        eventHistory: {}
+      required:
+        - id
+        - identifier
+        - status
+      additionalProperties: false
+    MedRequest:
+      title: MedRequest
+      type: object
+      properties:
+        id:
+          type: number
+        identifier:
+          type: string
+        instantiatesCanonical: {}
+        instantiatesUri: {}
+        basedOn: {}
+        priorPrescription: {}
+        groupIdentifier: {}
+        status:
+          type: string
+        statusReason: {}
+        statusChanged:
+          type: string
+          format: date-time
+        intent: {}
+        category: {}
+        priority:
+          type: string
+        doNotPerform:
+          type: boolean
+        medication: {}
+        subject: {}
+        informationSource: {}
+        authoredOn:
+          type: string
+          format: date-time
+        requester: {}
+        reported:
+          type: boolean
+        performerType: {}
+        performer: {}
+        recorder: {}
+        reason: {}
+        courseOfTherapyType: {}
+        insurance: {}
+        note: {}
+        dose: {}
+        dispenseRequest: {}
+        substitution: {}
+        eventHistory: {}
+      required:
+        - id
+        - identifier
+        - status
+        - intent
+        - priority
+      additionalProperties: false
+    MedUsage:
+      title: MedUsage
+      type: object
+      properties:
+        id:
+          type: number
+        identifier:
+          type: string
+        status:
+          type: string
+        category: {}
+        medication: {}
+        subject: {}
+        encounter: {}
+        effective: {}
+        dateAsserted:
+          type: string
+          format: date-time
+        informationSource: {}
+        derivedFrom: {}
+        reason: {}
+        note: {}
+        renderedDosageInstruction:
+          type: string
+        dosage: {}
+        adherence: {}
+      required:
+        - id
+        - identifier
+        - status
+      additionalProperties: false
+    
